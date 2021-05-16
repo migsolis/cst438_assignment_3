@@ -40,6 +40,21 @@
        <td>Local Time</td>
        <td th:text="${cityInfo.time}"></td>
      </tr>
-	  </table>
+	  </table><br><br>
+	  
+	  <form action="#" th:action="@{/cities/reservation}" method="post">
+	  	For a fabulous weekend get away for 2 to 
+	  			<span th:text="${cityInfo.name}">City</span> sign up here.<br><br>
+	  	<input type="hidden" th:name="city" th:value="${cityInfo.name}">
+	  	<label for="email">Email</label>
+	  	<input type="email" th:name="email" id="email"><br><br>
+	  	<input type="radio" th:name="level" th:value="luxury" id="luxury" name="level">
+	  	<label for="luxury">Luxury $1000</label><br><br>
+	  	<input type="radio" th:name="level" th:value="very_good" id="very_good" name="level">
+	  	<label for="very_good">Very Good $500</label><br><br>
+	  	<input type="radio" th:name="level" th:value="good" id="good" name="level">
+	  	<label for="good">Good $350</label><br><br>
+	  	<input type="submit" value="Submit">
+	  </form>
   </body>
 </html>
