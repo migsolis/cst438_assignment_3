@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.cst438</groupId>
-	<artifactId>cst438_assignment_2</artifactId>
+	<artifactId>cst438_assignment_3</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>cst438_assignment_2</name>
 	<description>CST 438 Assignment 2 REST controller and unit testing</description>
@@ -49,6 +49,15 @@
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-amqp</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.amqp</groupId>
+			<artifactId>spring-rabbit-test</artifactId>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 

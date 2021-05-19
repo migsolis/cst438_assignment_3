@@ -9,6 +9,9 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+
+import org.springframework.amqp.core.FanoutExchange;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +27,12 @@ public class CityService {
 	
 	@Autowired
 	private WeatherService weatherService;
+	
+	@Autowired
+	private RabbitTemplate rabbitTemplate;
+	
+	@Autowired
+	private FanoutExchange fanout;
 	
 	// This constructor is for stubbing the repositories and weather service
 	public CityService(CityRepository cityRepo, CountryRepository countryRepo, 
@@ -52,6 +61,20 @@ public class CityService {
 		cityInfo.setTime(timeToString(timeAndTemp.time, timeAndTemp.timezone));
 		
 		return cityInfo;
+	}
+	
+	public void requestReservation(
+			String cityName,
+			String level,
+			String email) {
+		String msg = "{\"cityName\": \"" + cityName +
+				"\", \"level\": \""+ level +
+				"\", \"email\": \"" + email + "\"}";
+		System.out.println("Sending message:" + msg);
+		rabbitTemplate.convertSendAndReceive(
+				fanout.getName(),
+				"",		// routing key none.
+				msg);
 	}
 	
 	// Converts temperature from K double to F String.
